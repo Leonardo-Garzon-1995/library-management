@@ -1,0 +1,26 @@
+[
+  {
+    "id": "bk-0e0f4ee8-4c11-4a8d-959d-3e5338141a09",
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "available": true
+  },
+  {
+    "id": "bk-e56c107a-fd4e-49c6-af68-ba2b684ea66f",
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "available": true
+  },
+  {
+    "id": "bk-ca1a8747-6d18-4d0b-945d-561a8c984fe6",
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "available": true
+  },
+  {
+    "id": "bk-e1c225c4-1ce8-4577-945d-c3917b6fe3eb",
+    "title": "1984",
+    "author": "George Orwell",
+    "available": true
+  }
+]
