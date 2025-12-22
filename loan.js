@@ -1,8 +1,8 @@
 export class Loan {
     constructor(user, book) {
         this.id = generateLoanId();
-        this.user = user;
-        this.book = book;
+        this.userId = user;
+        this.bookId = book;
         this.borrowedAt = new Date();
         this.returnedAt = null;
     }

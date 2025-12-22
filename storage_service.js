@@ -21,5 +21,36 @@ export class StorageService {
     }
 
     // Users --------------------------------------------------
+
+    static loadUsers() {
+        if (!fs.existsSync(USERS_FILE)) return [];
+
+        const raw = fs.readFileSync(USERS_FILE);
+        if (!raw) return [];
+
+        return JSON.parse(raw);
+    }
+
+    static saveUsers(users) {
+        fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
+    }
+
+    // Loans ------------------------------------------------------
+
+    static loadLoans() {
+        if (!fs.existsSync(LOANS_FILE)) return [];
+
+        const raw = fs.readFileSync(LOANS_FILE)
+        if (!raw) return []
+
+        return JSON.parse(raw)
+    }
+
+    static saveLoans(loans) {
+        if (!Array.isArray(loans)) {
+            throw new Error("saveLoans expects an array");
+        }
+        fs.writeFileSync(LOANS_FILE, JSON.stringify(loans, null, 2))
+    }
 }
 

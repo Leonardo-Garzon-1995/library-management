@@ -1,0 +1,22 @@
+[
+  {
+    "id": "us-59cf83a4-3527-4538-a8d7-b79814d6664b",
+    "name": "John Doe",
+    "loans": []
+  },
+  {
+    "id": "us-fc147286-7952-4098-b67f-9030fd81b8ef",
+    "name": "Alice Smith",
+    "loans": []
+  },
+  {
+    "id": "us-a9c824e8-a2e2-4b9c-8170-a4f5bcc2ed29",
+    "name": "Bob Johnson",
+    "loans": []
+  },
+  {
+    "id": "us-0fa99883-a778-4ed5-9c50-53fcbad8f7e0",
+    "name": "Jonas Svensson",
+    "loans": []
+  }
+]

@@ -13,6 +13,8 @@ class Library {
         this.loans = new Map(); // loan.id -> loan
 
         this.loadBooks();
+        this.loadUsers();
+        this.loadLoans()
     }
 
     addBook(book) {
@@ -22,6 +24,7 @@ class Library {
 
     addUser(user) {
         this.users.set(user.id, user);
+        this.saveUsers(Array.from(this.users.values()));
     }
 
     borrowBook(userId, bookId) {
@@ -33,9 +36,13 @@ class Library {
 
         book.borrow();
 
-        const loan = new Loan(user, book);
+        const loan = new Loan(user.id, book.id);
         this.loans.set(loan.id, loan);
-        user.addLoan(loan);
+        user.addLoan(loan.id);
+        this.saveBooks(Array.from(this.books.values()));
+        this.saveLoans(Array.from(this.loans.values()))
+        this.saveUsers(Array.from(this.users.values()));
+        
         return loan;
     }
 
@@ -59,23 +66,50 @@ class Library {
     saveBooks(books) {
         StorageService.saveBooks(books);
     }
+
+    loadUsers() {
+        const users = StorageService.loadUsers();
+        if (!users) throw new Error("No users found");
+
+        for (const u of users) {
+            const user = new User(u.name);
+            user.id = u.id;
+            user.loans = u.loans;
+            this.users.set(user.id, user);
+        }
+    }
+
+    saveUsers(users) {
+        StorageService.saveUsers(users);
+    }
+
+    loadLoans() {
+        const loans = StorageService.loadLoans();
+        if (!loans) throw new Error("No loans found")
+        
+        for (const l of loans) {
+            const user = this.users.get(l.userId)
+            const book = this.books.get(l.bookId)
+            if (!user || !book) continue;
+
+            const loan = new Loan(user, book);
+            loan.id = l.id;
+            loan.borrowedAt = l.borrowedAt;
+            loan.returnedAt = l.returnedAt;
+
+            this.loans.set(loan.id, loan)
+            user.addLoan(loan)
+
+
+        }
+    }
+
+    saveLoans(loan) {
+        StorageService.saveLoans(loan)
+    }
 }
 
 // TESTS ----------------------------------------------------------------------------------------
 const library = new Library();
 
-const user1 = new User("John Doe");
-library.addUser(user1)
 
-library.borrowBook(user1.id, "bk-0e0f4ee8-4c11-4a8d-959d-3e5338141a09");
-
-
-
-
-
-
-console.log(library.books);
-console.log("\x1b[35m---------------------------------------------------------\x1b[0m");
-console.log(library.users)
-console.log("\x1b[35m---------------------------------------------------------\x1b[0m");
-console.log(library.loans)

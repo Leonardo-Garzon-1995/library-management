@@ -2,18 +2,18 @@ export class User {
     constructor(name) {
         this.id = generateUserId();
         this.name = name;
-        this.loans = new Map(); // loan.id -> loan
+        this.loans = [];
     }
 
-    addLoan(loan) {
-        if (this.loans.has(loan.id)) {
+    addLoan(loanId) {
+        if (this.loans.includes(loanId)) {
             throw new Error("This user already has this loan");
         }
-        this.loans.set(loan.id, loan);
+        this.loans.push(loanId);
     }
 
     removeLoan(loanId) {
-        this.loans.delete(loanId);
+        this.loans.filter((loan) => loan.id !== loanId);
     }
 }
 
