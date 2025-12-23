@@ -42,11 +42,27 @@ class Library {
         this.saveBooks(Array.from(this.books.values()));
         this.saveLoans(Array.from(this.loans.values()))
         this.saveUsers(Array.from(this.users.values()));
-        
-        return loan;
     }
 
     // add later -> return book
+    returnBook(loanId) {
+        const loan = this.loans.get(loanId);
+        if (!loan) throw new Error("Loan not found");
+
+        const user = this.users.get(loan.userId);
+        if (!user) throw new Error("User not found");
+
+        const book = this.books.get(loan.bookId);
+        if (!book) throw new Error("Book not found");
+
+        loan.close();
+        this.loans.delete(loan.id);
+        book.returnBook();
+        user.removeLoan(loan.id);
+        this.saveBooks(Array.from(this.books.values()));
+        this.saveLoans(Array.from(this.loans.values()))
+        this.saveUsers(Array.from(this.users.values()));
+    }
     // add later -> list available books
 
     // STORAGE -> add later
@@ -94,13 +110,12 @@ class Library {
 
             const loan = new Loan(user, book);
             loan.id = l.id;
+            loan.userId = l.userId;
+            loan.bookId = l.bookId;
             loan.borrowedAt = l.borrowedAt;
             loan.returnedAt = l.returnedAt;
 
-            this.loans.set(loan.id, loan)
-            user.addLoan(loan)
-
-
+            this.loans.set(loan.id, loan);
         }
     }
 

@@ -28,5 +28,11 @@
     "title": "The Lord of the Rings",
     "author": "JRR Tolkien",
     "available": true
+  },
+  {
+    "id": "bk-186a450e-4d3f-4550-ad01-8884515fb7ca",
+    "title": "El Principito",
+    "author": "Antoine de Saint-Exupery",
+    "available": true
   }
 ]
