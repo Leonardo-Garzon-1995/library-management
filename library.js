@@ -59,6 +59,7 @@ class Library {
         this.loans.delete(loan.id);
         book.returnBook();
         user.removeLoan(loan.id);
+        console.log(user.loans)
         this.saveBooks(Array.from(this.books.values()));
         this.saveLoans(Array.from(this.loans.values()))
         this.saveUsers(Array.from(this.users.values()));

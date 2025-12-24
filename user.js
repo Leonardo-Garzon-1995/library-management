@@ -13,7 +13,7 @@ export class User {
     }
 
     removeLoan(loanId) {
-        const filtered = this.loans.filter((l) => l.id !== loanId);
+        const filtered = this.loans.filter((l) => l !== loanId);
         this.loans = filtered;
     }
 }

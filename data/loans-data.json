@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "id": "ln-fbff0071-083a-47b6-a5fc-6b79f1922473",
+    "userId": "us-8135bbd0-5633-4540-b235-e67733acd3b6",
+    "bookId": "bk-b5ea6471-4df0-491e-8924-03e8c41ddb79",
+    "borrowedAt": "2025-12-24T06:14:27.802Z",
+    "returnedAt": null
+  }
+]
