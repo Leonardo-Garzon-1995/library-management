@@ -22,8 +22,11 @@
   {
     "id": "us-8135bbd0-5633-4540-b235-e67733acd3b6",
     "name": "Leonardo Garzon",
-    "loans": [
-      "ln-fbff0071-083a-47b6-a5fc-6b79f1922473"
-    ]
+    "loans": []
+  },
+  {
+    "id": "us-6bbd7e16-f1ba-4d45-aef3-5342d7264a82",
+    "name": "Thomas Crane",
+    "loans": []
   }
 ]

@@ -1,3 +1,4 @@
+
 import { StorageService } from "./storage_service.js";
 
 import { Book } from "./book.js";
@@ -6,7 +7,7 @@ import { Loan } from "./loan.js";
 
 
 
-class Library {
+export class Library {
     constructor() {
         this.users = new Map(); // user.id -> user
         this.books = new Map(); // book.id -> book
@@ -17,13 +18,15 @@ class Library {
         this.loadLoans()
     }
 
-    addBook(book) {
-        this.books.set(book.id, book);
+    addBook(book, author) {
+        const newBook = new Book(book, author);
+        this.books.set(newBook.id, newBook);
         this.saveBooks(Array.from(this.books.values()));
     }
 
     addUser(user) {
-        this.users.set(user.id, user);
+        const newUser = new User(user);
+        this.users.set(newUser.id, newUser);
         this.saveUsers(Array.from(this.users.values()));
     }
 
@@ -44,9 +47,9 @@ class Library {
         this.saveUsers(Array.from(this.users.values()));
     }
 
-    // add later -> return book
     returnBook(loanId) {
         const loan = this.loans.get(loanId);
+        
         if (!loan) throw new Error("Loan not found");
 
         const user = this.users.get(loan.userId);
@@ -64,7 +67,18 @@ class Library {
         this.saveLoans(Array.from(this.loans.values()))
         this.saveUsers(Array.from(this.users.values()));
     }
-    // add later -> list available books
+    // lists
+    listBooks() {
+        if (this.books.size === 0) throw new Error("No books found");
+        let books = Array.from(this.books.values());
+        books.forEach((b) => console.log(b));
+    }
+
+    listUsers() {
+        if (this.users.size === 0) throw new Error("No users found");
+        let users = Array.from(this.users.values());
+        users.forEach((u) => console.log(u));
+    }
 
     // STORAGE -> add later
     loadBooks() {
@@ -124,8 +138,3 @@ class Library {
         StorageService.saveLoans(loan)
     }
 }
-
-// TESTS ----------------------------------------------------------------------------------------
-const library = new Library();
-
-
